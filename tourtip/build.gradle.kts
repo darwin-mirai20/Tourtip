@@ -29,7 +29,7 @@ mavenPublishing {
     )
 
     pom {
-        name.set(findPropertyByName("POM_ARTEFACT_ID").capitalized())
+        name.set(findPropertyByName("POM_ARTEFACT_ID").toString().replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() })
         description.set(findPropertyByName("POM_PROJECT_DESCRIPTION"))
         inceptionYear.set(findPropertyByName("POM_PROJECT_INCEPTION_YEAR"))
         url.set(findPropertyByName("POM_PROJECT_URL"))
