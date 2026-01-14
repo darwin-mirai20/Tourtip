@@ -32,14 +32,17 @@ internal class TourtipViewModel : ViewModel(), TourtipController, BoundsRegistry
     private val _state = MutableStateFlow(value = TourtipViewState())
     val state: StateFlow<TourtipViewState> = _state.asStateFlow()
 
+    private var currentTourId: String = ""
+
     private val currentState: TourtipViewState
         get() = _state.value
 
     private fun stepModelHandler() = currentState.run {
+        val filteredModels = if (currentTourId == "") tooltipModels else tooltipModels.filter { it.value.tourId == currentTourId }
         val stepModel = StepModel(
             currentStep = currentStep.inc(),
-            totalSteps = tooltipModels.size
-        ).takeIf { currentStep < tooltipModels.size.dec() }
+            totalSteps = filteredModels.size
+        ).takeIf { currentStep < filteredModels.size.dec() }
         _state.update { it.copy(stepModel = stepModel) }
     }
 
@@ -47,7 +50,8 @@ internal class TourtipViewModel : ViewModel(), TourtipController, BoundsRegistry
         _state.update { it.updateBoundsState(model, bounds) }
     }
 
-    override fun startTourtip() {
+    override fun startTourtip(tourId: String) {
+        setCurrentTour(tourId)
         _state.update { it.startTourtipState() }
         stepModelHandler()
     }
@@ -73,5 +77,9 @@ internal class TourtipViewModel : ViewModel(), TourtipController, BoundsRegistry
 
     fun onEnd() {
         _state.update { it.copy(isVisible = false) }
+    }
+
+    fun setCurrentTour(tourId: String) {
+        currentTourId = tourId
     }
 }

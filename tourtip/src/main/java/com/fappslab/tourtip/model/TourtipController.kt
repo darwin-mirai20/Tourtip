@@ -39,7 +39,7 @@ interface TourtipController {
     /**
      * Starts the Tourtip guided tour.
      */
-    fun startTourtip()
+    fun startTourtip(tourId : String = "")
 
     /**
      * Finishes the Tourtip guided tour.

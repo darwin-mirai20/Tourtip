@@ -59,4 +59,5 @@ data class TooltipModel(
     val message: @Composable () -> Unit,
     val action: @Composable ((controller: TourtipController) -> Unit)? = null,
     val highlightType: HighlightType,
+    val tourId : String = "",
 )

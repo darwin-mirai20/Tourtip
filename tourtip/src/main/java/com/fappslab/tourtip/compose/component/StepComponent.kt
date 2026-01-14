@@ -63,15 +63,15 @@ internal fun StepComponent(
             contentDescription = "Back",
         )
         Spacer(modifier = Modifier.size(TourtipTheme.dimen.dp4))
-//        Text(
-//            text = stringResource(
-//                id = R.string.tourtip_step_button,
-//                stepModel.currentStep.minimumValue(),
-//                stepModel.totalSteps.minimumValue()
-//            ),
-//            style = MaterialTheme.typography.bodyLarge,
-//            color = MaterialTheme.colorScheme.onBackground,
-//        )
+        Text(
+            text = stringResource(
+                id = R.string.tourtip_step_button,
+                stepModel.currentStep.minimumValue(),
+                stepModel.totalSteps.minimumValue()
+            ),
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onBackground,
+        )
         Spacer(modifier = Modifier.size(TourtipTheme.dimen.dp4))
         Icon(
             modifier = Modifier
